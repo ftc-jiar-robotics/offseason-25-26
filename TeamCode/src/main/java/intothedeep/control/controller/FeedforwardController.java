@@ -1,6 +1,6 @@
 package intothedeep.control.controller;
 
-import static org.firstinspires.ftc.teamcode.robot.intothedeep.subsystem.Common.MAX_VOLTAGE;
+import static intothedeep.subsystem.Common.MAX_VOLTAGE;
 
 import org.firstinspires.ftc.teamcode.control.gainmatrices.FeedforwardGains;
 import org.firstinspires.ftc.teamcode.control.motion.State;

@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.auto.message.SparkFunOTOSInputsMessage;
+import roadrunner.message.SparkFunOTOSInputsMessage;
 
 @Config
 public final class SparkFunOTOSLocalizer implements Localizer {

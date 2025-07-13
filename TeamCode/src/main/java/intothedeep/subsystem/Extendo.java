@@ -1,8 +1,8 @@
 package intothedeep.subsystem;
 
-import static org.firstinspires.ftc.teamcode.robot.intothedeep.subsystem.Common.SERVO_AXON_MAX_2;
-import static org.firstinspires.ftc.teamcode.robot.intothedeep.subsystem.Common.SERVO_AXON_MIN;
-import static org.firstinspires.ftc.teamcode.robot.intothedeep.subsystem.Common.mTelemetry;
+import static intothedeep.subsystem.Common.SERVO_AXON_MAX_2;
+import static intothedeep.subsystem.Common.SERVO_AXON_MIN;
+import static intothedeep.subsystem.Common.mTelemetry;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.hardware.SimpleServo;

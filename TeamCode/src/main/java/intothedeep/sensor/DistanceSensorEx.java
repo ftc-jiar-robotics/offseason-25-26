@@ -3,7 +3,7 @@ package intothedeep.sensor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.control.filter.singlefilter.FIRLowPassFilter;
+import intothedeep.control.filter.singlefilter.FIRLowPassFilter;
 import org.firstinspires.ftc.teamcode.control.gainmatrices.LowPassGains;
 
 public class DistanceSensorEx {

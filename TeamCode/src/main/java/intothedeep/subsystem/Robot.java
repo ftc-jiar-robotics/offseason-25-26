@@ -14,6 +14,8 @@ import intothedeep.subsystem.enhancement.AutoWallPickUp;
 import intothedeep.util.ActionScheduler;
 import intothedeep.util.BulkReader;
 import intothedeep.util.LoopUtil;
+import pedroPathing.constants.FConstants;
+import pedroPathing.constants.LConstants;
 
 @Config
 public final class Robot {
@@ -61,7 +63,7 @@ public final class Robot {
     public Robot(HardwareMap hardwareMap, boolean isAuto) {
         Limelight3A limelight3A = hardwareMap.get(Limelight3A.class, "limelight");
 
-        drivetrain = new Follower(hardwareMap, isAuto);
+        drivetrain = new Follower(hardwareMap, FConstants.class, LConstants.class);
         extendo = new Extendo(hardwareMap);
         bulkReader = new BulkReader(hardwareMap);
         intake = new Intake(hardwareMap);

@@ -6,8 +6,8 @@ import com.qualcomm.hardware.sparkfun.SparkFunOTOS;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.control.filter.dualfilter.ComplementaryFilter;
-import org.firstinspires.ftc.teamcode.control.gainmatrices.ComplementaryGains;
+import intothedeep.control.filter.dualfilter.ComplementaryFilter;
+import intothedeep.control.gainmatrices.ComplementaryGains;
 
 public class SparkFunOTOSEstimator implements Estimator {
     public static class Params {

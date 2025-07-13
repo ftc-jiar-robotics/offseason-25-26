@@ -1,6 +1,6 @@
 package intothedeep.control.filter.dualfilter;
 
-import org.firstinspires.ftc.teamcode.control.gainmatrices.ComplementaryGains;
+import intothedeep.control.gainmatrices.ComplementaryGains;
 
 public final class ComplementaryFilter implements DualFilter {
     private ComplementaryGains gains;

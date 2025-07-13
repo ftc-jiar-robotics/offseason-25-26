@@ -4,7 +4,7 @@ import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Twist2d;
 import com.acmerobotics.roadrunner.Vector2d;
 
-import org.firstinspires.ftc.teamcode.control.filter.dualfilter.KalmanFilter;
+import intothedeep.control.filter.dualfilter.KalmanFilter;
 import org.firstinspires.ftc.teamcode.control.gainmatrices.KalmanGains;
 
 // Credits to @j5155 of Capital City Dynamics 12087
