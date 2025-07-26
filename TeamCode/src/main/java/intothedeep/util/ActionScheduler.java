@@ -47,9 +47,9 @@ public final class ActionScheduler {
     }
 
     public void runBlocking() {
-        while (actions.peek() != null && !Thread.currentThread().isInterrupted()) {
+        Action currentAction = actions.peek();
+        while (currentAction != null && !Thread.currentThread().isInterrupted()) {
             TelemetryPacket packet = new TelemetryPacket();
-            Action currentAction = actions.peek();
 
             packet.fieldOverlay().getOperations().addAll(canvas.getOperations());
 
@@ -58,9 +58,11 @@ public final class ActionScheduler {
 
             update.run();
 
-            if (!running) {
+            if (!running && actions.peek() != null) {
                 actions.remove();
             }
+
+            currentAction = actions.peek();
         }
     }
 

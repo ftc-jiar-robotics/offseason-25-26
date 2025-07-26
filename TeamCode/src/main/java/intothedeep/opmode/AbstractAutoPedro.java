@@ -5,6 +5,7 @@ import static intothedeep.subsystem.Common.robot;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
+import com.pedropathing.follower.Follower;
 import com.pedropathing.localization.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -16,17 +17,23 @@ import intothedeep.util.LoopUtil;
 @Disabled
 public abstract class AbstractAutoPedro extends LinearOpMode {
 
+    protected Follower f;
+
     protected final void update() {
         robot.readSensors();
-        robot.run();
+        robot.update();
         robot.printTelemetry();
         mTelemetry.addData("Loop time (hertz)", LoopUtil.getLoopTimeInHertz());
         mTelemetry.update();
     }
 
+
+
     @Override
     public final void runOpMode() {
         robot = new Robot(hardwareMap);
+        f = robot.drivetrain;
+
         mTelemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
         robot.actionScheduler.setUpdate(this::update);

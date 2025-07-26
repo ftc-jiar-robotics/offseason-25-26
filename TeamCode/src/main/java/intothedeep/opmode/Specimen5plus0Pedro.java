@@ -8,11 +8,17 @@ import com.acmerobotics.roadrunner.ParallelAction;
 import com.acmerobotics.roadrunner.SequentialAction;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.localization.Pose;
+import com.pedropathing.pathgen.Point;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import com.pedropathing.pathgen.PathChain;
 
 import intothedeep.opmode.path.SpecPaths;
+import intothedeep.subsystem.Arm;
+import intothedeep.subsystem.Claw;
+import intothedeep.subsystem.Extendo;
+import intothedeep.subsystem.Intake;
+import intothedeep.subsystem.Robot;
 import intothedeep.subsystem.RobotActions;
 import pedroPathing.DrivePoseLoggingAction;
 import roadrunner.Actions;
@@ -20,26 +26,45 @@ import roadrunner.FollowPathAction;
 
 @Autonomous(name = "5+0 Pedro")
 public class Specimen5plus0Pedro extends AbstractAutoPedro {
-    private final SpecPaths S_P = new SpecPaths();
-    private final Follower f = robot.drivetrain;
+    private SpecPaths S_P;
+
 
     @Override
+    protected void onInit() {
+        super.onInit();
+
+        robot.arm.setArmAngle(Arm.ArmAngle.WALL_PICKUP);
+        robot.arm.setWristAngle(Arm.WristAngle.GRAB_OFF_WALL);
+        robot.arm.setArmstendoAngle(Arm.Extension.RETRACTED);
+        robot.claw.setAngle(Claw.ClawAngles.SPECIMEN_CLAMPED);
+        robot.intake.setTargetV4BAngle(Intake.V4BAngle.VERTICAL);
+        robot.extendo.setTargetExtension(Extendo.Extension.RETRACTED);
+        robot.setCurrentState(Robot.State.WALL_PICKUP);
+
+        robot.intake.run(robot.extendo.getTargetAngle());
+        robot.extendo.run(false);
+        robot.arm.run();
+        robot.claw.run();
+
+        S_P = new SpecPaths();
+    }
+    @Override
     protected Pose getStartPose() {
-        return null;
+        return new Pose(8.291, 65.000, Math.toRadians(0), true);
     }
 
     @Override
     protected void onRun() {
         scoreFirstSpecimen();
-        getToSamples();
-        giveSamples();
-        scoreSpecimen(0);
-        grabSpecimen();
-        scoreSpecimen(1);
-        grabSpecimen();
-        scoreSpecimen(2);
-        grabSpecimen();
-        scoreSpecimen(3);
+//        getToSamples();
+//        giveSamples();
+//        scoreSpecimen(0);
+//        grabSpecimen();
+//        scoreSpecimen(1);
+//        grabSpecimen();
+//        scoreSpecimen(2);
+//        grabSpecimen();
+//        scoreSpecimen(3);
     }
 
 

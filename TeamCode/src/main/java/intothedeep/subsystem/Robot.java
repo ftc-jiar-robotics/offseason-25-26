@@ -90,6 +90,10 @@ public final class Robot {
     public void run() {
 
         actionScheduler.run();
+        update();
+    }
+
+    public void update(){
         extendo.run(intake.getTargetV4BAngle().isV4BUnsafe());
         sweeper.run();
         intake.run(extendo.getTargetAngle());
@@ -103,9 +107,15 @@ public final class Robot {
     public void printTelemetry() {
         mTelemetry.addData("Robot State", robot.currentState.name());
         mTelemetry.addData("Loop time (hertz)", LoopUtil.getLoopTimeInHertz());
+
+        mTelemetry.addData("current x", drivetrain.poseUpdater.getPose().getX());
+        mTelemetry.addData("current y", drivetrain.poseUpdater.getPose().getY());
+        mTelemetry.addData("current Heading", drivetrain.poseUpdater.getPose().getHeading());
+
         intake.printTelemetry();
         extendo.printTelemetry();
         lift.printTelemetry();
+
 //        arm.printTelemetry();
 //        intake.printTelemetry();
 //        autoAligner.printTelemetry();
