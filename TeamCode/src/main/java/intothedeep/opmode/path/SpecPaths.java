@@ -82,6 +82,7 @@ public class SpecPaths {
 
     public PathChain getToSamples = f.pathBuilder()
             .addPath(pushingIntermediary) // 0
+            .setConstantHeadingInterpolation(Math.toRadians(0))
             .addPath(pushingIntermediary2) // 1
             .setConstantHeadingInterpolation(Math.toRadians(0))
             .build();
@@ -130,9 +131,13 @@ public class SpecPaths {
 
     public PathChain giveSamples = f.pathBuilder()
             .addPath(sample1) // 0
+            .setConstantHeadingInterpolation(Math.toRadians(0))
             .addPath(goToSample2) // 1
+            .setConstantHeadingInterpolation(Math.toRadians(0))
             .addPath(sample2) // 2
+            .setConstantHeadingInterpolation(Math.toRadians(0))
             .addPath(goToSample3) // 3
+            .setConstantHeadingInterpolation(Math.toRadians(0))
             .addPath(sample3) // 4
             .setConstantHeadingInterpolation(Math.toRadians(0))
             .build();
