@@ -66,8 +66,7 @@ public final class Actions {
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
             if (!isCalled) return true;
 
-            action.run(telemetryPacket);
-            return false;
+            return action.run(telemetryPacket);
         }
     }
 }
