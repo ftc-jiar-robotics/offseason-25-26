@@ -5,16 +5,17 @@ import static intothedeep.subsystem.Common.robot;
 
 import com.acmerobotics.dashboard.config.Config;
 
+import com.acmerobotics.roadrunner.PathBuilder;
+import com.pedropathing.follower.Follower;
 import com.pedropathing.pathgen.BezierCurve;
 import com.pedropathing.pathgen.BezierLine;
 import com.pedropathing.pathgen.Path;
-import com.pedropathing.pathgen.PathBuilder;
 import com.pedropathing.pathgen.PathChain;
 import com.pedropathing.pathgen.Point;
 
 @Config
 public class SpecPaths {
-    public static PathBuilder builder = new PathBuilder();
+    Follower f = robot.drivetrain;
     ScoreSpecimen S_S = new ScoreSpecimen();
 
     Point desiredScorePoint = new Point(39.000, 70.000, Point.CARTESIAN);
@@ -50,7 +51,7 @@ public class SpecPaths {
         desiredSpecControl1 = S_S.controlPoints1[cycle];
     }
 
-    public PathChain firstSpec = builder
+    public PathChain firstSpec = f.pathBuilder()
             .addPath(
                     new BezierLine(
                             new Point(8.291, 65.000, Point.CARTESIAN),
@@ -79,7 +80,7 @@ public class SpecPaths {
                     )
             );
 
-    public PathChain getToSamples = builder
+    public PathChain getToSamples = f.pathBuilder()
             .addPath(pushingIntermediary) // 0
             .addPath(pushingIntermediary2) // 1
             .setConstantHeadingInterpolation(Math.toRadians(0))
@@ -127,7 +128,7 @@ public class SpecPaths {
                     )
             );
 
-    public PathChain giveSamples = builder
+    public PathChain giveSamples = f.pathBuilder()
             .addPath(sample1) // 0
             .addPath(goToSample2) // 1
             .addPath(sample2) // 2

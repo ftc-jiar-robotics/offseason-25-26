@@ -1,6 +1,4 @@
 package intothedeep.opmode;
-
-import static intothedeep.opmode.path.SpecPaths.builder;
 import static intothedeep.subsystem.Common.robot;
 
 import com.acmerobotics.roadrunner.InstantAction;
@@ -122,7 +120,7 @@ public class Specimen5plus0Pedro extends AbstractAutoPedro {
     private void scoreSpecimen(int cycle) {
         S_P.setScorePoint(cycle);
 
-        PathChain scoreSpecChain = builder
+        PathChain scoreSpecChain = f.pathBuilder()
                 .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(10))
                 .setPathEndTValueConstraint(0.96)
                 .build();
@@ -144,7 +142,7 @@ public class Specimen5plus0Pedro extends AbstractAutoPedro {
     }
 
     private void grabSpecimen() {
-        PathChain grabSpecChain = builder
+        PathChain grabSpecChain = f.pathBuilder()
                 .addPath(S_P.grabSpec)
                 .setLinearHeadingInterpolation(Math.toRadians(10), Math.toRadians(0))
                 .build();
