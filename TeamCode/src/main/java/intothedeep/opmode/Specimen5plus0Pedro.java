@@ -54,8 +54,8 @@ public class Specimen5plus0Pedro extends AbstractAutoPedro {
     @Override
     protected void onRun() {
         scoreFirstSpecimen();
-//        getToSamples();
-//        giveSamples();
+        getToSamples();
+        giveSamples();
 //        scoreSpecimen(0);
 //        grabSpecimen();
 //        scoreSpecimen(1);
@@ -73,11 +73,20 @@ public class Specimen5plus0Pedro extends AbstractAutoPedro {
                 new SequentialAction(
                         new DrivePoseLoggingAction(f, "start_first_specimen", true),
                         new ParallelAction(
-                                new Actions.CallbackAction(RobotActions.setupSpecimen(), S_P.firstSpec, 0, 0),
-                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.92)), S_P.firstSpec, 0.85, 0),
+                                new Actions.CallbackAction(new SequentialAction(
+                                        new DrivePoseLoggingAction(f, "before_setup_first_specimen"),
+                                        RobotActions.setupSpecimen(),
+                                        new DrivePoseLoggingAction(f, "after_setup_first_specimen")
+                                ), S_P.firstSpec, 0, 0),
+                                new Actions.CallbackAction(new SequentialAction(
+                                        new DrivePoseLoggingAction(f, "before_max_power_first_specimen"),
+                                        new InstantAction(() -> f.setMaxPower(0.90)),
+                                        new DrivePoseLoggingAction(f, "after_max_power_first_specimen")
+                                ), S_P.firstSpec, 0.85, 0),
                                 new FollowPathAction(f, S_P.firstSpec)
                         ),
                         new DrivePoseLoggingAction(f, "setup_first_specimen"),
+                        new InstantAction(() -> f.setMaxPower(1)),
                         RobotActions.scoreSpecimen()
                 )
         );
@@ -86,14 +95,17 @@ public class Specimen5plus0Pedro extends AbstractAutoPedro {
     }
 
     private void getToSamples() {
+        S_P.getToSamples.getPath(0).setPathEndTValueConstraint(0.9);
+
         robot.actionScheduler.addAction(
                 new SequentialAction(
                         new DrivePoseLoggingAction(f, "start_go_to_samples"),
                         new ParallelAction(
-                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.92)), S_P.getToSamples, 0.9, 1),
+                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.92)), S_P.getToSamples, 0.8, 1),
                                 new FollowPathAction(f, S_P.getToSamples)
                         ),
-                        new DrivePoseLoggingAction(f, "finish_go_to_samples")
+                        new DrivePoseLoggingAction(f, "finish_go_to_samples"),
+                        new InstantAction(() -> f.setMaxPower(1))
                 )
         );
 
@@ -101,12 +113,23 @@ public class Specimen5plus0Pedro extends AbstractAutoPedro {
     }
 
     private void giveSamples() {
+        S_P.giveSamples.getPath(0).setPathEndTValueConstraint(0.85);
+        S_P.giveSamples.getPath(2).setPathEndTValueConstraint(0.85);
+
         robot.actionScheduler.addAction(
                 new SequentialAction(
                         new DrivePoseLoggingAction(f, "start_push_samples"),
                         new ParallelAction(
                                 new Actions.CallbackAction(RobotActions.setupWallPickup(), S_P.giveSamples, 0, 0),
-                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.8)), S_P.giveSamples, 0.85, 4),
+                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.65, 0),
+                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(1)), S_P.giveSamples, 0, 1),
+                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.8, 1),
+                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(1)), S_P.giveSamples, 0, 2),
+                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.65, 2),
+                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(1)), S_P.giveSamples, 0, 3),
+                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.8, 3),
+                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(1)), S_P.giveSamples, 0, 4),
+                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.65, 4),
                                 new FollowPathAction(f, S_P.giveSamples, true)
                         ),
                         new DrivePoseLoggingAction(f, "finish_push_samples")

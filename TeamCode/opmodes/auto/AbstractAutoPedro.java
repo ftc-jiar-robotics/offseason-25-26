@@ -43,7 +43,9 @@ public abstract class AbstractAutoPedro extends LinearOpMode {
         Common.AUTO_END_POSE_PEDRO = robot.drivetrain.getPose();
     }
 
-    protected void onInit() {}
+    protected void onInit() {
+        Constants.setConstants(FConstants.class, LConstants.class);
+    }
     protected void configure() {}
     protected abstract Pose getStartPose();
     protected abstract void onRun();
