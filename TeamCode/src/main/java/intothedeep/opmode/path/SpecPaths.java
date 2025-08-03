@@ -5,7 +5,6 @@ import static intothedeep.subsystem.Common.robot;
 
 import com.acmerobotics.dashboard.config.Config;
 
-import com.acmerobotics.roadrunner.PathBuilder;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.pathgen.BezierCurve;
 import com.pedropathing.pathgen.BezierLine;
@@ -18,9 +17,9 @@ public class SpecPaths {
     Follower f = robot.drivetrain;
     ScoreSpecimen S_S = new ScoreSpecimen();
 
-    Point desiredScorePoint = new Point(39.000, 70.000, Point.CARTESIAN);
-    Point desiredSpecControl1 = new Point(22.000, 3.000, Point.CARTESIAN);
-    Point desiredSpecControl2 = new Point(15.000, 72.000, Point.CARTESIAN);
+    public Point desiredScorePoint = new Point(39.000, 70.000, Point.CARTESIAN);
+    public Point desiredSpecControl1 = new Point(22.000, 3.000, Point.CARTESIAN);
+    public Point desiredSpecControl2 = new Point(15.000, 72.000, Point.CARTESIAN);
 
     public static class ScoreSpecimen {
         public Point[] scorePoints = {
@@ -51,14 +50,14 @@ public class SpecPaths {
         desiredSpecControl1 = S_S.controlPoints1[cycle];
     }
 
-    public PathChain firstSpec = f.pathBuilder()
+    public PathChain line1 = f.pathBuilder()
             .addPath(
                     new BezierLine(
                             new Point(8.291, 65.000, Point.CARTESIAN),
                             new Point(39.000, 76.000, Point.CARTESIAN)
                     )
             )
-            .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
+            .setConstantHeadingInterpolation(Math.toRadians(0))
             .build();
 
     public Path pushingIntermediary =
@@ -80,7 +79,7 @@ public class SpecPaths {
                     )
             );
 
-    public PathChain getToSamples = f.pathBuilder()
+    public PathChain line2 = f.pathBuilder()
             .addPath(pushingIntermediary) // 0
             .setConstantHeadingInterpolation(Math.toRadians(0))
             .addPath(pushingIntermediary2) // 1
@@ -129,7 +128,7 @@ public class SpecPaths {
                     )
             );
 
-    public PathChain giveSamples = f.pathBuilder()
+    public PathChain line3 = f.pathBuilder()
             .addPath(sample1) // 0
             .setConstantHeadingInterpolation(Math.toRadians(0))
             .addPath(goToSample2) // 1
@@ -142,16 +141,6 @@ public class SpecPaths {
             .setConstantHeadingInterpolation(Math.toRadians(0))
             .build();
 
-    public Path scoreSpec =
-            new Path(
-                    new BezierCurve(
-                            new Point(robot.drivetrain.getPose()),
-                            desiredSpecControl1,
-                            desiredSpecControl2,
-                            desiredScorePoint
-                    )
-            );
-
     public Path grabSpec =
             new Path(
                     new BezierCurve(
@@ -162,4 +151,8 @@ public class SpecPaths {
                             new Point(9.000, 27.500, Point.CARTESIAN)
                     )
             );
+
+    public PathChain firstSpec = line1;
+    public PathChain getToSamples = line2;
+    public PathChain giveSamples = line3;
 }
