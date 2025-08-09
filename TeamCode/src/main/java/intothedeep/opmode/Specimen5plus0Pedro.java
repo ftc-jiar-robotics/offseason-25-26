@@ -6,6 +6,8 @@ import com.acmerobotics.roadrunner.ParallelAction;
 import com.acmerobotics.roadrunner.SequentialAction;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.localization.Pose;
+import com.pedropathing.pathgen.BezierCurve;
+import com.pedropathing.pathgen.Path;
 import com.pedropathing.pathgen.Point;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
@@ -86,12 +88,12 @@ public class Specimen5plus0Pedro extends AbstractAutoPedro {
                                 new FollowPathAction(f, S_P.firstSpec)
                         ),
                         new DrivePoseLoggingAction(f, "setup_first_specimen"),
-                        new InstantAction(() -> f.setMaxPower(1)),
                         RobotActions.scoreSpecimen()
                 )
         );
 
         robot.actionScheduler.runBlocking();
+        f.setMaxPower(1);
     }
 
     private void getToSamples() {
@@ -104,12 +106,12 @@ public class Specimen5plus0Pedro extends AbstractAutoPedro {
                                 new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.92)), S_P.getToSamples, 0.8, 1),
                                 new FollowPathAction(f, S_P.getToSamples)
                         ),
-                        new DrivePoseLoggingAction(f, "finish_go_to_samples"),
-                        new InstantAction(() -> f.setMaxPower(1))
+                        new DrivePoseLoggingAction(f, "finish_go_to_samples")
                 )
         );
 
         robot.actionScheduler.runBlocking();
+        f.setMaxPower(1);
     }
 
     private void giveSamples() {
@@ -136,14 +138,25 @@ public class Specimen5plus0Pedro extends AbstractAutoPedro {
                 )
         );
 
-
         robot.actionScheduler.runBlocking();
+        f.setMaxPower(1);
     }
 
     private void scoreSpecimen(int cycle) {
         S_P.setScorePoint(cycle);
 
+        Path scoreSpec =
+                new Path(
+                        new BezierCurve(
+                                new Point(robot.drivetrain.getPose()),
+                                S_P.desiredSpecControl1,
+                                S_P.desiredSpecControl2,
+                                S_P.desiredScorePoint
+                        )
+                );
+
         PathChain scoreSpecChain = f.pathBuilder()
+                .addPath(scoreSpec)
                 .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(10))
                 .setPathEndTValueConstraint(0.96)
                 .build();
@@ -162,6 +175,7 @@ public class Specimen5plus0Pedro extends AbstractAutoPedro {
         );
 
         robot.actionScheduler.runBlocking();
+        f.setMaxPower(1);
     }
 
     private void grabSpecimen() {
@@ -183,5 +197,6 @@ public class Specimen5plus0Pedro extends AbstractAutoPedro {
         );
 
         robot.actionScheduler.runBlocking();
+        f.setMaxPower(1);
     }
 }
