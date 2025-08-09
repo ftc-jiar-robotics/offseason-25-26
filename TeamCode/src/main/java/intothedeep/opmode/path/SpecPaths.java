@@ -66,8 +66,8 @@ public class SpecPaths {
                     new BezierCurve(
                             new Point(39.000, 76.000, Point.CARTESIAN),
                             new Point(30.000, 74.000, Point.CARTESIAN),
-                            new Point(17.500, 41.000, Point.CARTESIAN),
-                            new Point(52.000, 35.000, Point.CARTESIAN)
+                            new Point(18.250, 37.350, Point.CARTESIAN),
+                            new Point(51.400, 35.000, Point.CARTESIAN)
                     )
             );
 
@@ -76,7 +76,7 @@ public class SpecPaths {
                     new BezierCurve(
                             new Point(52.000, 35.000, Point.CARTESIAN),
                             new Point(60.000, 32.500, Point.CARTESIAN),
-                            new Point(60.000, 23.000, Point.CARTESIAN)
+                            new Point(60.000, 27.000, Point.CARTESIAN)
                     )
             );
 
@@ -90,42 +90,42 @@ public class SpecPaths {
     public Path sample1 =
             new Path(
                     new BezierLine(
-                            new Point(60.000, 23.000, Point.CARTESIAN),
-                            new Point(20.000, 23.000, Point.CARTESIAN)
+                            new Point(60.000, 27.000, Point.CARTESIAN),
+                            new Point(20.000, 27.000, Point.CARTESIAN)
                     )
             );
 
     public Path goToSample2 =
             new Path(
                     new BezierCurve(
-                            new Point(20.000, 23.000, Point.CARTESIAN),
+                            new Point(20.000, 27.000, Point.CARTESIAN),
                             new Point(62.000, 28.400, Point.CARTESIAN),
-                            new Point(60.000, 13.000, Point.CARTESIAN)
+                            new Point(60.500, 17.000, Point.CARTESIAN)
                     )
             );
 
     public Path sample2 =
             new Path(
                     new BezierLine(
-                            new Point(60.000, 13.000, Point.CARTESIAN),
-                            new Point(20.000, 12.500, Point.CARTESIAN)
+                            new Point(60.500, 17.000, Point.CARTESIAN),
+                            new Point(19.000, 17.000, Point.CARTESIAN)
                     )
             );
 
     public Path goToSample3 =
             new Path(
                     new BezierCurve(
-                            new Point(20.000, 12.500, Point.CARTESIAN),
+                            new Point(19.000, 15.000, Point.CARTESIAN),
                             new Point(57.000, 18.000, Point.CARTESIAN),
-                            new Point(60.000, 7.500, Point.CARTESIAN)
+                            new Point(60.000, 12.000, Point.CARTESIAN)
                     )
             );
 
     public Path sample3 =
             new Path(
                     new BezierLine(
-                            new Point(60.000, 7.500, Point.CARTESIAN),
-                            new Point(8.300, 7.500, Point.CARTESIAN)
+                            new Point(60.000, 12.000, Point.CARTESIAN),
+                            new Point(8.300, 12.000, Point.CARTESIAN)
                     )
             );
 

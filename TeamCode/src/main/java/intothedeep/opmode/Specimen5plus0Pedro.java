@@ -56,13 +56,13 @@ public class Specimen5plus0Pedro extends AbstractAutoPedro {
         scoreFirstSpecimen();
         getToSamples();
         giveSamples();
-//        scoreSpecimen(0);
-//        grabSpecimen();
-//        scoreSpecimen(1);
-//        grabSpecimen();
-//        scoreSpecimen(2);
-//        grabSpecimen();
-//        scoreSpecimen(3);
+        scoreSpecimen(0);
+        grabSpecimen();
+        scoreSpecimen(1);
+        grabSpecimen();
+        scoreSpecimen(2);
+        grabSpecimen();
+        scoreSpecimen(3);
     }
 
 
@@ -121,15 +121,15 @@ public class Specimen5plus0Pedro extends AbstractAutoPedro {
                         new DrivePoseLoggingAction(f, "start_push_samples"),
                         new ParallelAction(
                                 new Actions.CallbackAction(RobotActions.setupWallPickup(), S_P.giveSamples, 0, 0),
-                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.65, 0),
+                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.5, 0),
                                 new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(1)), S_P.giveSamples, 0, 1),
                                 new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.8, 1),
                                 new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(1)), S_P.giveSamples, 0, 2),
-                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.65, 2),
+                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.5, 2),
                                 new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(1)), S_P.giveSamples, 0, 3),
                                 new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.8, 3),
                                 new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(1)), S_P.giveSamples, 0, 4),
-                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.65, 4),
+                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.75, 4),
                                 new FollowPathAction(f, S_P.giveSamples, true)
                         ),
                         new DrivePoseLoggingAction(f, "finish_push_samples")
