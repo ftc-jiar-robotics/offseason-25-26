@@ -128,13 +128,10 @@ public final class Lift {
         CachedMotor leader = new CachedMotor(hardwareMap, "leader", RPM_435);
         CachedMotor follower = new CachedMotor(hardwareMap, "follower", RPM_435);
 
-        MotorEx dummy = new MotorEx(hardwareMap, "follower2", RPM_435);
+        MotorEx dummy = new MotorEx(hardwareMap, "dummy", RPM_435);
 
         encoder = dummy.encoder;
         encoder.reset();
-
-        follower.setInverted(true);
-        dummy.setInverted(true);
 
         encoder.setDirection(Motor.Direction.REVERSE);
 

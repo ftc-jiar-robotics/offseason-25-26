@@ -55,6 +55,7 @@ public final class MainTeleOp extends LinearOpMode {
         gamepadEx2 = new GamepadEx(gamepad2);
 
         robot = new Robot(hardwareMap);
+        robot.drivetrain.startTeleopDrive();
 
         while (opModeInInit()) {
             gamepadEx1.readButtons();
@@ -100,7 +101,8 @@ public final class MainTeleOp extends LinearOpMode {
             robot.drivetrain.setTeleOpMovementVectors(
                     gamepadEx1.getLeftY() * slowMult,
                     -gamepadEx1.getLeftX() * slowMult,
-                    -gamepadEx1.getRightX() * slowTurningMult
+                    -gamepadEx1.getRightX() * slowTurningMult,
+                    false
             );
 
             if (keyPressed(1, X)) isSpecimenMode = !isSpecimenMode;

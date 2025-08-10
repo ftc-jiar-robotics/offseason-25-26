@@ -30,7 +30,7 @@ public final class Robot {
     public final Sweeper sweeper;
     public final Hang hang;
 //    public final AutoAligner autoAligner;
-    public final LimelightEx limelightEx;
+//    public final LimelightEx limelightEx;
 
     public enum State {
         NEUTRAL,
@@ -61,7 +61,7 @@ public final class Robot {
      * @param hardwareMap: A constant map that holds all the parts for config in code
      */
     public Robot(HardwareMap hardwareMap, boolean isAuto) {
-        Limelight3A limelight3A = hardwareMap.get(Limelight3A.class, "limelight");
+//        Limelight3A limelight3A = hardwareMap.get(Limelight3A.class, "limelight");
 
         drivetrain = new Follower(hardwareMap, FConstants.class, LConstants.class);
         extendo = new Extendo(hardwareMap);
@@ -73,12 +73,12 @@ public final class Robot {
         sweeper = new Sweeper(hardwareMap);
         hang = new Hang(hardwareMap);
 //        autoAligner = new AutoAligner(hardwareMap);
-        limelightEx = new LimelightEx(limelight3A, hardwareMap);
+//        limelightEx = new LimelightEx(limelight3A, hardwareMap);
 //        autoWallPickUp = new AutoWallPickUp(limelightEx);
         actionScheduler = new ActionScheduler();
 
-        limelight3A.stop();
-        limelight3A.start();
+//        limelight3A.stop();
+//        limelight3A.start();
     }
 
     // Reads all the necessary sensors (including battery volt.) in one bulk read
