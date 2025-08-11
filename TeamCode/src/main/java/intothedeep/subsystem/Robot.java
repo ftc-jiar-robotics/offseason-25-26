@@ -8,6 +8,7 @@ import com.acmerobotics.dashboard.config.Config;
 import com.pedropathing.follower.Follower;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import intothedeep.sensor.vision.LimelightEx;
 import intothedeep.subsystem.enhancement.AutoWallPickUp;
@@ -23,6 +24,7 @@ public final class Robot {
     public final Extendo extendo;
     public final Intake intake;
     public final BulkReader bulkReader;
+    public final TouchSensor magnet;
     public final Claw claw;
     public final Lift lift;
     public final Arm arm;
@@ -76,6 +78,7 @@ public final class Robot {
 //        limelightEx = new LimelightEx(limelight3A, hardwareMap);
 //        autoWallPickUp = new AutoWallPickUp(limelightEx);
         actionScheduler = new ActionScheduler();
+        magnet = hardwareMap.get(TouchSensor.class, "magnet");
 
 //        limelight3A.stop();
 //        limelight3A.start();

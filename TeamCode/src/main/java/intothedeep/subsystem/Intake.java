@@ -111,7 +111,7 @@ public final class Intake {
     public boolean setRollerPower(double power, boolean isOverride) {
         if (isRollerLocked && !isOverride) return false;
 
-        rollerPower = power;
+        rollerPower = -power;
 
         intake.set(rollerPower);
 

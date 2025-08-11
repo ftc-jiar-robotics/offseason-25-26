@@ -150,7 +150,8 @@ public class RobotActions {
                         new ParallelAction(
                                 new SequentialAction(
                                         setV4B(Intake.V4BAngle.UP, RETRACTION_FOR_TRANSFER.setV4BUpWait),
-                                        setExtendo(Extendo.Extension.RETRACTED, RETRACTION_FOR_TRANSFER.retractExtendoWait)
+                                        setExtendo(Extendo.Extension.RETRACTED, 0),
+                                        telemetryPacket -> !robot.magnet.isPressed()
                                 ),
                                 new SequentialAction(
                                         setArm(Arm.ArmAngle.NEUTRAL, RETRACTION_FOR_TRANSFER.setNeutralArmWait),
