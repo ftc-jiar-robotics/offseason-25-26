@@ -17,16 +17,13 @@ public class SpecPaths {
     Follower f = robot.drivetrain;
     ScoreSpecimen S_S = new ScoreSpecimen();
 
-    public Point desiredScorePoint = new Point(39.000, 70.000, Point.CARTESIAN);
-    public Point desiredSpecControl1 = new Point(22.000, 3.000, Point.CARTESIAN);
-    public Point desiredSpecControl2 = new Point(15.000, 72.000, Point.CARTESIAN);
-
     public static class ScoreSpecimen {
         public Point[] scorePoints = {
                 new Point(39.000, 70.000, Point.CARTESIAN),
                 new Point(39.000, 72.000, Point.CARTESIAN),
                 new Point(39.000, 74.000, Point.CARTESIAN),
-                new Point(39.000, 76.000, Point.CARTESIAN)
+                new Point(39.000, 76.000, Point.CARTESIAN),
+                new Point(39.000, 78.000, Point.CARTESIAN)
         };
 
         public Point[] controlPoints1 = {
@@ -34,6 +31,7 @@ public class SpecPaths {
                 new Point(22.000, 5.000, Point.CARTESIAN),
                 new Point(22.000, 7.000, Point.CARTESIAN),
                 new Point(22.000, 9.000, Point.CARTESIAN),
+                new Point(22.000, 11.000, Point.CARTESIAN),
         };
 
         public Point[] controlPoints2 = {
@@ -41,13 +39,8 @@ public class SpecPaths {
                 new Point(15.000, 74.000, Point.CARTESIAN),
                 new Point(15.000, 76.000, Point.CARTESIAN),
                 new Point(15.000, 78.000, Point.CARTESIAN),
+                new Point(15.000, 80.000, Point.CARTESIAN),
         };
-    }
-
-    public void setScorePoint(int cycle) {
-        desiredScorePoint = S_S.scorePoints[cycle];
-        desiredSpecControl2 = S_S.controlPoints2[cycle];
-        desiredSpecControl1 = S_S.controlPoints1[cycle];
     }
 
     public PathChain line1 = f.pathBuilder()
@@ -140,6 +133,56 @@ public class SpecPaths {
             .addPath(sample3) // 4
             .setConstantHeadingInterpolation(Math.toRadians(0))
             .build();
+
+    public Path scoreSecondSpec =
+            new Path(
+                    new BezierCurve(
+                            new Point(8.300, 7.500, Point.CARTESIAN),
+                            S_S.controlPoints1[0],
+                            S_S.controlPoints2[0],
+                            S_S.scorePoints[0]
+                    )
+            );
+
+    public Path scoreThirdSpec =
+            new Path(
+                    new BezierCurve(
+                            new Point(9.000, 27.500, Point.CARTESIAN),
+                            S_S.controlPoints1[1],
+                            S_S.controlPoints2[1],
+                            S_S.scorePoints[1]
+                    )
+            );
+
+    public Path scoreFourthSpec =
+            new Path(
+                    new BezierCurve(
+                            new Point(9.000, 27.500, Point.CARTESIAN),
+                            S_S.controlPoints1[2],
+                            S_S.controlPoints2[2],
+                            S_S.scorePoints[2]
+                    )
+            );
+
+    public Path scoreFifthSpec =
+            new Path(
+                    new BezierCurve(
+                            new Point(9.000, 27.500, Point.CARTESIAN),
+                            S_S.controlPoints1[3],
+                            S_S.controlPoints2[3],
+                            S_S.scorePoints[3]
+                    )
+            );
+
+    public Path scoreSixthSpec =
+            new Path(
+                    new BezierCurve(
+                            new Point(9.000, 27.500, Point.CARTESIAN),
+                            S_S.controlPoints1[4],
+                            S_S.controlPoints2[4],
+                            S_S.scorePoints[4]
+                    )
+            );
 
     public Path grabSpec =
             new Path(
