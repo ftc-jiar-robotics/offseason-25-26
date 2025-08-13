@@ -4,11 +4,8 @@ import static intothedeep.subsystem.Common.robot;
 import com.acmerobotics.roadrunner.InstantAction;
 import com.acmerobotics.roadrunner.ParallelAction;
 import com.acmerobotics.roadrunner.SequentialAction;
-import com.pedropathing.follower.Follower;
 import com.pedropathing.localization.Pose;
-import com.pedropathing.pathgen.BezierCurve;
 import com.pedropathing.pathgen.Path;
-import com.pedropathing.pathgen.Point;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import com.pedropathing.pathgen.PathChain;
@@ -58,13 +55,13 @@ public class Specimen5plus0Pedro extends AbstractAutoPedro {
         scoreFirstSpecimen();
         getToSamples();
         giveSamples();
-        scoreSpecimen(0);
-        grabSpecimen();
         scoreSpecimen(1);
         grabSpecimen();
         scoreSpecimen(2);
         grabSpecimen();
         scoreSpecimen(3);
+        grabSpecimen();
+        scoreSpecimen(4);
     }
 
 
@@ -123,15 +120,15 @@ public class Specimen5plus0Pedro extends AbstractAutoPedro {
                         new DrivePoseLoggingAction(f, "start_push_samples"),
                         new ParallelAction(
                                 new Actions.CallbackAction(RobotActions.setupWallPickup(), S_P.giveSamples, 0, 0),
-                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.5, 0),
+                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.65, 0),
                                 new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(1)), S_P.giveSamples, 0, 1),
                                 new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.8, 1),
                                 new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(1)), S_P.giveSamples, 0, 2),
-                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.5, 2),
+                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.65, 2),
                                 new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(1)), S_P.giveSamples, 0, 3),
                                 new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.8, 3),
                                 new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(1)), S_P.giveSamples, 0, 4),
-                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.75, 4),
+                                new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.7)), S_P.giveSamples, 0.65, 4),
                                 new FollowPathAction(f, S_P.giveSamples, true)
                         ),
                         new DrivePoseLoggingAction(f, "finish_push_samples")
@@ -143,34 +140,30 @@ public class Specimen5plus0Pedro extends AbstractAutoPedro {
     }
 
     private void scoreSpecimen(int cycle) {
-        S_P.setScorePoint(cycle);
-
-        Path scoreSpec =
-                new Path(
-                        new BezierCurve(
-                                new Point(robot.drivetrain.getPose()),
-                                S_P.desiredSpecControl1,
-                                S_P.desiredSpecControl2,
-                                S_P.desiredScorePoint
-                        )
-                );
+        Path scoreCurrentSpec = switch (cycle) {
+            case 1 -> S_P.scoreSecondSpec;
+            case 2 -> S_P.scoreThirdSpec;
+            case 3 -> S_P.scoreFourthSpec;
+            case 4 -> S_P.scoreFifthSpec;
+            default -> S_P.scoreSecondSpec;
+        };
 
         PathChain scoreSpecChain = f.pathBuilder()
-                .addPath(scoreSpec)
+                .addPath(scoreCurrentSpec)
                 .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(10))
                 .setPathEndTValueConstraint(0.96)
                 .build();
 
         robot.actionScheduler.addAction(
                 new SequentialAction(
-                        new DrivePoseLoggingAction(f, "start_spec_cycle_"+(cycle+2)),
+                        new DrivePoseLoggingAction(f, "start_spec_cycle_"+(cycle+1)),
                         new ParallelAction(
                                 new Actions.CallbackAction(RobotActions.setupSpecimen(), scoreSpecChain, 0, 0),
                                 new Actions.CallbackAction(new InstantAction(() -> f.setMaxPower(0.92)), scoreSpecChain, 0.85, 0),
                                 new FollowPathAction(f, scoreSpecChain)
                         ),
                         RobotActions.scoreSpecimen(),
-                        new DrivePoseLoggingAction(f, "score_spec_cycle_"+(cycle+2))
+                        new DrivePoseLoggingAction(f, "score_spec_cycle_"+(cycle+1))
                 )
         );
 
