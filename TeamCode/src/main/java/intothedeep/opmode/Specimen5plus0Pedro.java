@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import com.pedropathing.pathgen.PathChain;
 
+import PedroJSON.main.PathLoader;
 import intothedeep.opmode.path.SpecPaths;
 import intothedeep.subsystem.Arm;
 import intothedeep.subsystem.Claw;
